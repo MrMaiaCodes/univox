@@ -1,35 +1,65 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import CardContent from '@mui/material/CardContent';
-import CardMedia from '@mui/material/CardMedia';
-import Typography from '@mui/material/Typography';
-import { Button, CardActionArea, CardActions } from '@mui/material';
+import './login.css';
 
-export default function MultiActionAreaCard() {
+
+export default function LogIn() {
+  const [user, setUser] = React.useState("");
+  const [password, setPassword] = React.useState("");
+  const [validUser, setValidUser] = React.useState(false);
+
+  React.useEffect(()=> {
+    checkUser();
+  }, [user, password])
+  const checkUser = (userEmail?: string) => {
+    const findEmailPaterRegex = /^(\w|\.)+@\w+(\.com|\.com.br)$/;
+    if(userEmail) {
+      const emailTest = findEmailPaterRegex.test(userEmail);
+      if (emailTest) {
+        setValidUser(true);
+      } else {
+        setValidUser(false);
+      }
+    }
+    //arrumar o retorno desta função
+    setValidUser(true);
+  };
   return (
-    <Card sx={{ maxWidth: 345 }}>
-      <CardActionArea>
-        <CardMedia
-          component="img"
-          height="140"
-          image="/static/images/cards/contemplative-reptile.jpg"
-          alt="green iguana"
-        />
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="div">
-            Lizard
-          </Typography>
-          <Typography variant="body2" color="text.secondary">
-            Lizards are a widespread group of squamate reptiles, with over 6,000
-            species, ranging across all continents except Antarctica
-          </Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-      </CardActions>
-    </Card>
+    <div className='login-card'>
+      <Card sx={{ maxWidth: 345 }}>
+        <div className='login-form'>
+          <form className='login-form'>
+            <p>
+              user:
+            </p>
+            <input
+              onChange={(e) => {
+                setUser(e.target.value);
+                checkUser(e.target.value);
+              }}
+          placeholder='enter username here'
+              value={user}
+            />
+            <p>
+              password:
+            </p>
+            <input
+              type="password"
+              onChange={(e) => { setPassword(e.target.value) }}
+              placeholder='enter password here'
+              value={password}
+            />
+
+            <button style={{ margin: '30px' }}
+              onClick={(e) => { e.preventDefault() }}
+              disabled={!validUser}
+            >
+              confirm
+            </button>
+          </form>
+        </div>
+      </Card>
+    </div>
+
   );
 }
