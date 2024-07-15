@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
-import './login.css';
+import './login.scss';
 
 
 export default function LogIn() {
@@ -11,53 +11,62 @@ export default function LogIn() {
   React.useEffect(()=> {
     checkUser();
   }, [user, password])
-  const checkUser = (userEmail?: string) => {
-    const findEmailPaterRegex = /^(\w|\.)+@\w+(\.com|\.com.br)$/;
-    if(userEmail) {
-      const emailTest = findEmailPaterRegex.test(userEmail);
-      if (emailTest) {
+  const checkUser = () => {
+    const findEmailPaterRegex = /^(\w|\.)+@\w+(\.com|\.com.br)$/;      
+      if (user != "" && password != "") {
         setValidUser(true);
       } else {
         setValidUser(false);
       }
-    }
     //arrumar o retorno desta função
-    setValidUser(true);
   };
   return (
     <div className='login-card'>
-      <Card sx={{ maxWidth: 345 }}>
-        <div className='login-form'>
+      <h1>
+        Chant
+      </h1>
+      <Card sx={{ 
+        width: 400,
+        height: 500,
+        padding: "15px 50px 0px 50px",
+        maxWidth: 500,
+        }}>
+        
           <form className='login-form'>
-            <p>
-              user:
+            <h2 style={{alignSelf: 'center', fontSize: '30px', marginBottom: '1px'}}>
+              Login
+            </h2>
+            <p className='login-p'>
+              User:
             </p>
             <input
               onChange={(e) => {
                 setUser(e.target.value);
-                checkUser(e.target.value);
               }}
-          placeholder='enter username here'
+          placeholder='Enter username here'
               value={user}
             />
-            <p>
-              password:
+            <p className='login-p'>
+              Password:
             </p>
             <input
               type="password"
               onChange={(e) => { setPassword(e.target.value) }}
-              placeholder='enter password here'
+              placeholder='Enter password here'
               value={password}
             />
 
-            <button style={{ margin: '30px' }}
+            <button style={{ marginTop: '30px'}}
               onClick={(e) => { e.preventDefault() }}
               disabled={!validUser}
             >
-              confirm
+              Confirm
+            </button>
+            <button style={{ marginTop: '30px'}}>
+              forgot password?
             </button>
           </form>
-        </div>
+        
       </Card>
     </div>
 
