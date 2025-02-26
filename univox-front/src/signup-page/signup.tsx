@@ -45,11 +45,11 @@ export default function SignUp() {
   const [formValues, setFormValues] = React.useState(initialFormValues);
   const [icon, setIcon] = React.useState();
 
-  const handleImputChange = (e)=>{
-    const {name, value} = e.target;
+  const handleImputChange = (e) => {
+    const { name, value } = e.target;
     setFormValues({
       ...formValues,
-      [name]: value, 
+      [name]: value,
     })
   }
 
@@ -59,6 +59,18 @@ export default function SignUp() {
     // @ts-ignore
     setIcon(URL.createObjectURL(file))
   }
+
+
+  // {<option value='mother'>Mother's maiden name</option>
+  //             <option value='city'>City you grew up in</option>
+  //             <option value='food'>Favorite food</option>
+  //             <option value='pet'>Pet name</option> }
+  const securityQuestionOptions = [
+    { id: 1, value: "mother", text: "Mother's maiden name" },
+    { id: 2, value: "city", text: "City you grew up in" },
+    { id: 3, value: "food", text: "Favorite food" },
+    { id: 4, value: "pet", text: "Pet name" }
+  ];
 
   /* email: "",
   password: "",
@@ -85,7 +97,7 @@ export default function SignUp() {
             placeholder='enter your email'
             name='email'
             value={formValues.email}
-            onChange={handleImputChange}/>
+            onChange={handleImputChange} />
           <p>password</p>
           <input
             placeholder='enter your password'
@@ -105,29 +117,30 @@ export default function SignUp() {
           <p>security question</p>
           {/* <input placeholder='select one of the security questions below' name='securityQuestion' value={formValues.securityQuestion}/> */}
           <select name='securityQuestion' value={formValues.securityQuestion} onChange={handleImputChange}>
-            <option value='mother'>Mother's maiden name</option>
+            {securityQuestionOptions.map((val, idx) => <option value={val.value}>{val.text}</option>)}
+            {/* <option value='mother'>Mother's maiden name</option>
             <option value='city'>City you grew up in</option>
             <option value='food'>Favorite food</option>
-            <option value='pet'>Pet name</option>
+            <option value='pet'>Pet name</option> */}
           </select>
           {/* select one of the security questions below: */}
           <p>answer</p>
           <input placeholder='enter the answer to the question above' />
           <p>full name</p>
-          <input placeholder='enter full name' name='name' value={formValues.fullName} onChange={handleImputChange}/>
+          <input placeholder='enter full name' name='name' value={formValues.fullName} onChange={handleImputChange} />
           <p>birthdate</p>
-          <input placeholder='enter birthdate' name='birthdate' type='date' onChange={handleImputChange}/>
+          <input placeholder='enter birthdate' name='birthdate' type='date' onChange={handleImputChange} />
           {/* make a calendar */}
           <p>country</p>
-          <input placeholder='enter country' name='country' value={formValues.country} onChange={handleImputChange}/>
+          <input placeholder='enter country' name='country' value={formValues.country} onChange={handleImputChange} />
           {/* pick country */}
           <p>document type</p>
-          <input placeholder='enter document type' name='documentType' value={formValues.documentType} onChange={handleImputChange}/>
+          <input placeholder='enter document type' name='documentType' value={formValues.documentType} onChange={handleImputChange} />
           {/* make document type field also a select */}
           <p>document number</p>
-          <input placeholder='enter document number' name='documentNumber' value={formValues.documentNumber} onChange={handleImputChange}/>
+          <input placeholder='enter document number' name='documentNumber' value={formValues.documentNumber} onChange={handleImputChange} />
           <p>photo/icon</p>
-          <input placeholder='insert photo or icon' type='file' onChange={iconAlterer}/>
+          <input placeholder='insert photo or icon' type='file' onChange={iconAlterer} />
           <p>gender</p>
           <select name='gender' value={formValues.gender} onChange={handleImputChange}>
             <option value='male'>male</option>
@@ -139,6 +152,9 @@ export default function SignUp() {
           <p>Click on the checkbox below to accept terms of service</p>
           <p>We guarantee neither your personal information nor the messages
             you dictate will be intentionally disclosed to any third party</p>
+          <button style={{width: "30px", alignSelf: "center", marginRight: "20px"}}>
+            Save Info
+          </button>
         </form>
 
       </Card>

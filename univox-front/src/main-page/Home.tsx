@@ -14,7 +14,15 @@ function Home() {
     function signUpPage() {
         return (
             <div>
-                <SignUp/>
+                <SignUp />
+                <div className='button-container'>
+                    <button onClick={() => setPage("1")}>
+                        Go back
+                    </button>
+                    {/* <button style={{ marginLeft: "10px" }} onClick={()=> setPage("2")}>
+                        Save Info
+                    </button> */}
+                </div>
             </div>
         )
     }
@@ -28,7 +36,7 @@ function Home() {
                     <button onClick={() => setPage("1")}>
                         Go back
                     </button>
-                    <button style={{ marginLeft: "10px" }}>
+                    <button style={{ marginLeft: "10px" }} onClick={() => setPage("3")}>
                         Sign up
                     </button>
                 </div>
@@ -49,7 +57,7 @@ function Home() {
                     <button onClick={() => login()}>
                         Log in
                     </button>
-                    <button style={{ marginLeft: "10px" }}>
+                    <button style={{ marginLeft: "10px" }} onClick={() => setPage("3")}>
                         Sign up
                     </button>
                 </div>
@@ -63,11 +71,12 @@ function Home() {
             {
                 page === "1" && initialPage()
                 ||
-                //page === "2" && loginPage()
-                page === "2" && signUpPage()
+                page === "2" && loginPage()
+                ||
+                page === "3" && signUpPage()
 
             }
-    </>
+        </>
 
     )
 

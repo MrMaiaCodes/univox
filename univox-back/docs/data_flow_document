@@ -1,0 +1,10 @@
+front           back
+
+enter chant room ->
+                    access database
+                 <- send room number or error messsage
+
+login requirement->
+                    access database
+                    verify information
+                 <- send success or error message
