@@ -1,16 +1,16 @@
-function login(body:any) {
+export function login(body:any) {
     return {
         "message": "success"
     };
 }
 
-function accessDatabase(body:any) {
+export function accessDatabase(body:any) {
     return {
         "message": "success"
     };
 }
 
-function verifyLoginInfo(body:any) {
+export function verifyLoginInfo(body:any) {
     return {
         "message": "success"
     };
