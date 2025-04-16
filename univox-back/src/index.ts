@@ -33,30 +33,44 @@ app.get("/get/:id", async (req: Request, res: Response) => {
 
 });
 
-app.post("/item", async (req: Request, res: Response) => {
+app.post("/room", async (req: Request, res: Response) => {
     try {
         const body = req.body;
-        const { id, name, alive } = body;
-        await putItemOnDB(id, name, alive)
+        const { id, roomName,
+            chantGiver,
+            chantSayers,
+            creationDate,
+            expirationDate } = body;
+        await putItemOnDB(id, roomName,
+            chantGiver,
+            chantSayers,
+            creationDate,
+            expirationDate
+        )
         res.send({
             "success": true,
             "error": []
         })
-    } catch(e) {
-        
+    } catch (e) {
+        res.status(500).json({ "error": e });
     }
 });
 
-app.delete("/user/:id", async (req: Request, res: Response) => {
-    const params = req.params || { id: 0 };
-    const stringId = params.id;
-    const id = parseInt(stringId);
+app.delete("/room/:id", async (req: Request, res: Response) => {
+    try {
+        const params = req.params || { id: 0 };
+        const stringId = params.id;
+        const id = parseInt(stringId);
 
-    await popFromDB(id);
-    res.send({
-        "success": true,
-        "error": []
-    })
+        await popFromDB(id);
+        res.send({
+            "success": true,
+            "error": []
+        })
+    } catch (e) {
+        res.status(404).json({ "error": e });
+    }
+
 });
 
 app.listen(port, () => { console.log("running") });
