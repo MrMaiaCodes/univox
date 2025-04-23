@@ -1,85 +1,44 @@
-import React from 'react'
-import './home.scss'
+import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
+import './home.scss';
 import Wave from './wave-component/Wave';
-import LogIn from '../login-page/login';
-import SignUp from '../signup-page/signup';
+//import SignUp from '../signup-page/SignUp';
+//import LogIn from '../login-page/Login';
 
 function Home() {
-    const [page, setPage] = React.useState("1");
-    function login() {
-        setPage("2");
-    }
+    const navigate = useNavigate();
 
-    /*this signup is lowercase cause it is not creating a component, but merely recalling one*/
-    function signUpPage() {
-        return (
-            <div>
-                <SignUp />
-                <div className='button-container'>
-                    <button onClick={() => setPage("1")}>
-                        Go back
-                    </button>
-                    {/* <button style={{ marginLeft: "10px" }} onClick={()=> setPage("2")}>
-                        Save Info
-                    </button> */}
-                </div>
-            </div>
-        )
-    }
-
-    function loginPage() {
-        return (
-            <div>
-                <LogIn />
-
-                <div className='button-container'>
-                    <button onClick={() => setPage("1")}>
-                        Go back
-                    </button>
-                    <button style={{ marginLeft: "10px" }} onClick={() => setPage("3")}>
-                        Sign up
-                    </button>
-                </div>
-            </div>
-
-        )
-    }
-
-    function initialPage() {
-        return (
-            <div>
-                <h1>
-                    Chant
-                    <p>speak as one</p>
-                </h1>
-
-                <div className='button-container'>
-                    <button onClick={() => login()}>
-                        Log in
-                    </button>
-                    <button style={{ marginLeft: "10px" }} onClick={() => setPage("3")}>
-                        Sign up
-                    </button>
-                </div>
-                <Wave />
-            </div>
-        )
-    }
+    useEffect(() => {
+        const body = document.body;
+        body.classList.add("no-scroll");
+        window.scrollTo({ top: 0, behavior: "smooth" });
+        return () => {
+            body.classList.remove("no-scroll");
+        }
+    }, []);
 
     return (
-        <>
-            {
-                page === "1" && initialPage()
-                ||
-                page === "2" && loginPage()
-                ||
-                page === "3" && signUpPage()
+        <div className='initial-page-container'>
+            <div className='button-container-login'>
+                <button onClick={() => navigate('/login')}>Log in</button>
+                <button style={{ marginLeft: '10px' }} onClick={() => navigate('/signup')}>
+                    Sign up
+                </button>
 
-            }
-        </>
-
+            </div>
+            <h1>
+                Chant
+                <p>speak as one</p>
+            </h1>
+            <div className='button-container-room'>
+                <button onClick={() => navigate('/login')}>Log in</button>
+                <button style={{ marginLeft: '10px' }} onClick={() => navigate('/signup')}>
+                    Sign up
+                </button>
+            </div>
+            <Wave/>
+        </div>
     )
-
 }
 
 export default Home;
