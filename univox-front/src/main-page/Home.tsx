@@ -31,9 +31,9 @@ function Home() {
                 <p>speak as one</p>
             </h1>
             <div className='button-container-room'>
-                <button onClick={() => navigate('/login')}>Log in</button>
+                <button onClick={() => navigate('/rooms')}>Enter Existing Room</button>
                 <button style={{ marginLeft: '10px' }} onClick={() => navigate('/signup')}>
-                    Sign up
+                    Create Room
                 </button>
             </div>
             <Wave/>

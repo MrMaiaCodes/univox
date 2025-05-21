@@ -1,12 +1,13 @@
 import * as React from 'react';
 import Card from '@mui/material/Card';
 import './login.scss';
-
+import { useNavigate } from 'react-router-dom';
 
 export default function LogIn() {
   const [user, setUser] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [validUser, setValidUser] = React.useState(false);
+  const navigate = useNavigate();
 
   React.useEffect(()=> {
     checkUser();
@@ -68,6 +69,15 @@ export default function LogIn() {
           </form>
         
       </Card>
+
+      <div className='button-container-login'>
+        <button onClick={()=> navigate("/")}>
+          Return Home    
+        </button>
+        <button onClick={()=> navigate("/signup")} style={{marginLeft: '10px', marginTop: '40px'}}>
+          Go to Signup
+        </button>
+      </div>
     </div>
 
   );

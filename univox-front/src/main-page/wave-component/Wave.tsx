@@ -3,14 +3,10 @@ import './wave.css'
 
 function Wave() {
     return (
-        <div>
+        <div className = "wave-wrapper">
             <div className = "wave-content">
-                <div className='wave'>
-
-                </div>
-                <div className='wave'>
-
-                </div>
+                <div className='wave'/>
+                <div className='wave'/>
             </div>
         </div>
     )
