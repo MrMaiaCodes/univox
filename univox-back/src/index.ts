@@ -2,12 +2,28 @@ import express, { Express, Request, Response } from "express";
 import dotenv from "dotenv";
 import { login } from "./service/login";
 import { getItemFromDB, putItemOnDB, popFromDB } from "./db/dbOperation/dbService";
+import cors from "cors";
+import { getAllRoomsService } from "./service/getRoomsService";
 
 dotenv.config();
 
 const app: Express = express();
-const port = process.env.PORT || 3000;
+const port = 4000;
 app.use(express.json());
+let corsOptions = {
+    origin: ["http://localhost:3000"]
+}
+app.use(cors(corsOptions))
+
+app.get("/rooms", async(req: Request, res: Response) => {
+    try {
+        const rooms = await getAllRoomsService();
+        const response = {data:rooms};
+        res.send(response);
+    } catch(e) {
+        res.status(404).json({"error": e});
+    }
+})
 
 app.get("/", (req: Request, res: Response) => {
     res.send("it worked!");

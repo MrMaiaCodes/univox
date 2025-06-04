@@ -2,6 +2,7 @@ import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
 import "./room.scss"; 
+import Loader from "../components/loader/Loader";
 
 type Room = {
   id: number;
@@ -18,9 +19,9 @@ const Room: React.FC = ()=> {
   const navigate = useNavigate();
 
   useEffect(()=> {
-    axios.get("seuBackend.com/rooms")
+    axios.get("http://localhost:4000/rooms")
     .then(response => {
-      setRooms(response.data.items);
+      setRooms(response.data.data);
     })
     .catch(error => {
       console.error("erro ao configurar a sala: ", error);
@@ -76,7 +77,7 @@ const Room: React.FC = ()=> {
     //configurar aqui navegação para a sala, exemplo navigate("/room/id")
   }
 
-  if(loading) return <p>carregando salas...</p>
+  if(loading) return (<Loader loading={loading}/>)
 
   return (
     <div className="rooms-list-container">
@@ -84,7 +85,7 @@ const Room: React.FC = ()=> {
       <ul className="rooms-list">
         {
           rooms.map(room => (
-            <li key={room.id} className="room-card" onClick={()=> enterRoom(room.id)}>
+            <li key={room.id} className="rooms-card" onClick={()=> enterRoom(room.id)}>
               <h3>{room.roomName}</h3>
               <p><strong>giver:</strong> {room.chantGiver}</p>
               <p><strong>people chanting:</strong>{room.chantSayers}</p>
