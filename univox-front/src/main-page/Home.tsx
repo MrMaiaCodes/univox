@@ -32,7 +32,7 @@ function Home() {
             </h1>
             <div className='button-container-room'>
                 <button onClick={() => navigate('/rooms')}>Enter Existing Room</button>
-                <button style={{ marginLeft: '10px' }} onClick={() => navigate('/signup')}>
+                <button style={{ marginLeft: '10px' }} onClick={() => navigate('/create')}>
                     Create Room
                 </button>
             </div>
