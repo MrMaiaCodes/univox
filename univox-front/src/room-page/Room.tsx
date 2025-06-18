@@ -81,7 +81,7 @@ const Room: React.FC = ()=> {
 
   return (
     <div className="rooms-list-container">
-      <h2>Choose a Room</h2>
+      <h2>Choose a Chant</h2>
       <ul className="rooms-list">
         {
           rooms.map(room => (

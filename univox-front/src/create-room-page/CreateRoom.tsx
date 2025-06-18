@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import "./createRoom.scss";
 
 function CreateRoom() {
   const [loading, setLoading] = useState(false);
@@ -11,9 +12,39 @@ function CreateRoom() {
     expirationMinutes: 60,
   })
 
-  const handleChange = (field: string, value: string | number) => { }
+  const handleChange = (field: string, value: string | number) => {
+    setFormData(prev => ({...prev, [field]: value}));
+  
+  }
 
-  const handleSubmit = () => { }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setMessage("");
+
+    const now = Math.floor(Date.now()/1000);
+    const expirationDate = now + Number(formData.expirationMinutes) * 60;
+
+    const roomData = {
+      ...formData,
+      creationDate: now,
+      expirationDate
+    };
+
+    try {
+      const response = await fetch("seuBackend/rooms", {
+        method: "POST",
+        headers: {"Content-Type": "application/json"},
+        body: JSON.stringify({roomData})
+      });
+      if(!response.ok) {throw new Error("Error creating chant")};
+      setMessage("Chant created successfully");
+    } catch(error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  }
 
   return (
     <>
@@ -22,12 +53,12 @@ function CreateRoom() {
       </button>
       <div className="create-room-container">
         <h2>
-          Create a New Room
+          Create New Chant
         </h2>
         <form onSubmit={handleSubmit}>
           <div className="field">
             <span>
-              Room Name
+              Chant Name
             </span>
             <input
               type="text"
@@ -69,7 +100,7 @@ function CreateRoom() {
           </div>
 
           <button type="submit" disabled={loading}>
-            {loading ? "Creating...":"Create Room"}
+            {loading ? "Creating...":"Create Chant"}
           </button>
         </form>
         {message && <p className="message">{message}</p>}
