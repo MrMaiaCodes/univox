@@ -48,7 +48,7 @@ function CreateRoom() {
 
   return (
     <>
-      <button>
+      <button onClick={()=> window.location.href="/"}>
         home
       </button>
       <div className="create-room-container">
