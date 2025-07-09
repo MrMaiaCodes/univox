@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import './home.scss';
-import Wave from './wave-component/Wave';
+import Wave from './wave-component/wave';
 //import SignUp from '../signup-page/SignUp';
 //import LogIn from '../login-page/Login';
 

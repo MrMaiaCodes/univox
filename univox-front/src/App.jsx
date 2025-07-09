@@ -1,10 +1,11 @@
-import { useState } from 'react'
 import { BrowserRouter as Router, Routes, Route} from 'react-router-dom';
-import Home from './main-page/Home'
-import SignUp from './signup-page/SignUp';
-import LogIn from './login-page/Login';
-import CreateRoom from './create-room-page/CreateRoom';
-import Room from "./room-page/Room"
+import Home from './pages/main-page/home'
+import SignUp from './pages/signup-page/signup';
+import LogIn from './pages/login-page/login';
+import CreateRoom from './pages/create-room-page/createRoom';
+import SelectRoom from "./pages/room-page/select/selectRoom"
+import ChantRoom from './pages/room-page/chant-room/chantRoom';
+
 function App() {
 
   return (
@@ -12,8 +13,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home />}/>
         <Route path='/login' element={<LogIn />}/>
+        <Route path='/room' element={<ChantRoom/>}/>
         <Route path='/signup' element={<SignUp />}/>
-        <Route path='/rooms' element={<Room />}/>
+        <Route path='/rooms' element={<SelectRoom />}/>
         <Route path='/create' element={<CreateRoom/>}/>
       </Routes>
     </Router>

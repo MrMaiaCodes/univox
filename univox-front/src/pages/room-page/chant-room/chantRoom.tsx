@@ -1,0 +1,63 @@
+import React, { useState, useRef, useEffect } from "react";
+
+const ChantRoom = (
+  {
+    roomName,
+    isOwner,
+    userName,
+    chantGiver
+  }: {
+    roomName: string,
+    isOwner: boolean,
+    userName: string,
+    chantGiver: string
+  }
+) => {
+  const [chant, setChant] = useState("");
+  const [chantList, setChantList] = useState<string[]>([]);
+  const scrollRef = useRef<HTMLDivElement>(null)
+
+  const sendChant = () => {
+    if (!chant.trim()) return;
+    setChantList(prev => [...prev, `${userName}: ${chant}`]);
+    setChant("");
+  }
+
+  useEffect(() => {
+    scrollRef.current?.scrollIntoView({ behavior: "smooth" });
+  }, [chantList]
+  )
+
+  return (
+    <div className="chant-room">
+      <header>
+      <button className="exit-button">
+        home
+        </button>
+        <h2>
+          {roomName}
+        </h2>
+        <h3>
+          {chantGiver}
+        </h3>
+        
+      </header>
+
+      <div className="chant-display">
+        {chantList.map((c,i) => (<div></div>))}
+      </div>
+
+      <div>
+        text area for sending of message
+      </div>
+
+      <button onClick={(e)=> {e.preventDefault()}}>
+        send out chant
+      </button>
+
+      
+    </div>
+  )
+}
+
+export default ChantRoom;

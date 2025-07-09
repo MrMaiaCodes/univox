@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from "react";
 import {useNavigate} from "react-router-dom";
 import axios from "axios";
-import "./room.scss"; 
-import Loader from "../components/loader/Loader";
+import "./selectRoom.scss"; 
+import Loader from "../../../components/loader/loader";
 
 type Room = {
   id: number;
@@ -13,7 +13,7 @@ type Room = {
   expirationDate: string;
 }
 
-const Room: React.FC = ()=> {
+const SelectRoom: React.FC = ()=> {
   const [rooms, setRooms] = useState<Room[]>([]);
   const [loading, setLoading] = useState(true);
   const navigate = useNavigate();
@@ -101,4 +101,4 @@ const Room: React.FC = ()=> {
 
   )
 }
-export default Room;
+export default SelectRoom;
