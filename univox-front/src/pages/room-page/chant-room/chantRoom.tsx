@@ -1,5 +1,5 @@
 import React, { useState, useRef, useEffect } from "react";
-
+import "./chantRoom.scss"
 const ChantRoom = (
   {
     roomName,
@@ -31,8 +31,8 @@ const ChantRoom = (
   return (
     <div className="chant-room">
       <header>
-      <button className="exit-button">
-        home
+        <button className="exit-button">
+          home
         </button>
         <h2>
           {roomName}
@@ -40,22 +40,33 @@ const ChantRoom = (
         <h3>
           {chantGiver}
         </h3>
-        
+
       </header>
 
       <div className="chant-display">
-        {chantList.map((c,i) => (<div></div>))}
+        {chantList.map((c, i) => (
+          <div key={i} className="chant-message">{c}</div>
+        ))}
+        <div ref={scrollRef} />
       </div>
 
-      <div>
-        text area for sending of message
-      </div>
+      {isOwner && (
+        <div>
+          <input 
+            className="chant-input-text-area"
+            placeholder="type here your message"
+            onChange={(e)=> setChant(e.target.value)}
+            value={chant}
+            onKeyDown={(e)=> e.key === "Enter" && sendChant()}
+          />
+          <button onClick={sendChant}>
+          send out chant
+        </button>
+        </div>
 
-      <button onClick={(e)=> {e.preventDefault()}}>
-        send out chant
-      </button>
+        
+      )}
 
-      
     </div>
   )
 }

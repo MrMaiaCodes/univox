@@ -1,11 +1,72 @@
 .chant-room {
-
-}
-
-.exit-button{
-
-}
-
-.chant-display {
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
   
+  header {
+    background-color: blue;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+
+    h2 {
+      margin: 0px;
+      font-size: 22px;
+    }
+
+    .exit-button {
+      background: white;
+      color: blue;
+      border: none;
+      padding: 8px 14px;
+      border-radius: 6px;
+      cursor: pointer;
+
+      &:hover {
+        background-color: #e5e5e5;
+      }
+    }
+  }
+  .chant-display {
+    flex: 1;
+    padding: 20px;
+    overflow-y: auto;
+    background-color: #f9f9f9;
+
+    .chant-message {
+      font-size: 18px;
+      margin-bottom: 12px;
+      padding: 10px;
+      border-left: 4px solid blue;
+      background-color: white;
+      border-radius: 6px;
+    }
+  }
+
+  .chant-input {
+    display: flex;
+    padding: 12px;
+    border-top: 1px solid #ccc;
+    background-color: white;
+
+    input {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      margin-right: 12px;
+    }
+
+    button {
+      background-color: blue;
+      color: white;
+      padding: 10px 18px;
+      font-size: 16px;
+      border: none;
+      cursor: pointer;
+    }
+  }
 }
